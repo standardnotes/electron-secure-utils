@@ -4,7 +4,22 @@
 
 A spellchecker provider for Electron, that encrypts your dictionary file.
 
+## Why?
+
+Electron uses the built-in spellchecker from Chromium. It stores custom dictionary words on a plain-text file
+named `Custom dictionary.txt`:
+
+```txt
+worda
+wordb
+checksum_v1 = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+```
+
+This package reads all words from such file (if any exists) and then encrypts them using [Electron's safeStorage](https://www.electronjs.org/docs/latest/api/safe-storage). The plain-text file is then deleted and the encrypted file is used to read/write words going forward.
+
 ## Installation
+
+_Your Electron app must be using `electron@15.3.0` or later._
 
 To install, run:
 
