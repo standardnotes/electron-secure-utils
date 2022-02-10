@@ -1,0 +1,51 @@
+{
+  "name": "@standardnotes/electron-clear-data",
+  "version": "1.1.1",
+  "description": "Securely clears user data for your Electron application.",
+  "homepage": "https://github.com/standardnotes/electron-secure-utils/electron-clear-data#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/standardnotes/electron-secure-utils/electron-clear-data.git"
+  },
+  "bugs": {
+    "url": "https://github.com/standardnotes/electron-secure-utils/electron-clear-data/issues",
+    "email": "security@standardnotes.com"
+  },
+  "keywords": [
+    "electron",
+    "clear",
+    "userdata",
+    "delete",
+    "wipe",
+    "application",
+    "leveldb"
+  ],
+  "license": "MIT",
+  "author": "Johnny Almonte <johnny@standardnotes.com>",
+  "main": "dist/main.js",
+  "typings": "dist/main.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "coverage": "npm run test -- --coverage",
+    "watch": "tsc -w",
+    "build": "tsc",
+    "prepublish": "npm run build"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^16.11.4",
+    "electron": "^15.3.0",
+    "fs-extra": "^10.0.0",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  },
+  "peerDependencies": {
+    "electron": ">=15.3.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=14.0.0 <17.0.0"
+  }
+}

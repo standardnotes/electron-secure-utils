@@ -18,6 +18,9 @@
   "references": [
     {
       "path": "packages/electron-secure-spellchecker"
+    },
+    {
+      "path": "packages/electron-clear-data"
     }
   ],
   "exclude": [
