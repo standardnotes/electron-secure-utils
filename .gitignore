@@ -1,0 +1,4 @@
+node_modules
+yarn-error.log
+packages/electron-clear-data/dist
+packages/electron-secure-spellchecker/dist
