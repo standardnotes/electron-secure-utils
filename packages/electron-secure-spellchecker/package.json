@@ -26,6 +26,8 @@
     "test:app": "electron test/electron-app",
     "coverage": "npm run test -- --coverage",
     "watch": "tsc -w",
+    "clean": "rm -fr dist",
+    "prebuild": "npm run clean",
     "build": "tsc",
     "prepublish": "npm run build"
   },

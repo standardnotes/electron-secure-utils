@@ -27,6 +27,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
     "coverage": "npm run test -- --coverage",
+    "clean": "rm -fr dist",
+    "prebuild": "npm run clean",
     "watch": "tsc -w",
     "build": "tsc",
     "prepublish": "npm run build"
