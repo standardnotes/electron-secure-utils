@@ -1,6 +1,6 @@
 {
   "name": "@standardnotes/electron-secure-spellchecker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A spellchecker provider for Electron, that encrypts your dictionary file.",
   "homepage": "https://github.com/standardnotes/secure-utils/electron-secure-spellchecker#readme",
   "repository": {
@@ -19,8 +19,8 @@
   ],
   "license": "MIT",
   "author": "Johnny Almonte <johnny@standardnotes.com>",
-  "exports": "./dist/main.js",
-  "typings": "dist/main.d.ts",
+  "exports": "./dist/index.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
     "test:app": "electron test/electron-app",
