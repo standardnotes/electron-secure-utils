@@ -1,1 +1,1 @@
-# secure-utils
+# electron-secure-utils

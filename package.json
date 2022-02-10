@@ -1,5 +1,5 @@
 {
-  "name": "@standardnotes/secure-utils",
+  "name": "electron-secure-utils",
   "private": true,
   "engines": {
     "node": ">=14.0.0 <17.0.0"
