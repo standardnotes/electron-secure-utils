@@ -52,6 +52,16 @@ const secureSpellChecker = SecureSpellChecker.initialize();
 const suggestions = secureSpellChecker.getSpellingSuggestions('ytpo');
 ```
 
+1. Import the package into your `preload` script and call `setSpellCheckProvider()`
+
+```javascript
+import SecureSpellChecker from '@standardnotes/electron-secure-spellchecker';
+
+...
+
+SecureSpellChecker.setSpellCheckProvider();
+```
+
 ---
 
 You can also see usage on [the test app](test/electron-app/)
