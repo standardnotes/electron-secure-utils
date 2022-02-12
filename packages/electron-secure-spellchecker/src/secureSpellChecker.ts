@@ -1,18 +1,19 @@
 import { app, ipcMain, BrowserWindow } from 'electron'
 import EncryptedDictionary from './encryptedDictionary'
-import { IPCMessageChannels } from './constants'
+import { IPCMessageChannels, MACOS_SPELLCHECKER_NOOP_WARNING } from './constants'
 
 type SpellingSuggestions = {
   [word: string]: string[]
 }
 
 class SecureSpellChecker {
-  private userDictionary: EncryptedDictionary
+  private userDictionary?: EncryptedDictionary
   private spellingSuggestions: SpellingSuggestions = {}
 
   constructor() {
-    if (process.platform === 'darwin') {
-      throw new Error('System spellchecker is used in MacOS. Skipping...');
+    if (this.isMacOS) {
+      console.warn(MACOS_SPELLCHECKER_NOOP_WARNING)
+      return
     }
 
     if (process.type !== 'browser') {
@@ -26,11 +27,19 @@ class SecureSpellChecker {
     this.handleIPCMessages()
   }
 
+  private get isMacOS() {
+    return process.platform === 'darwin'
+  }
+
   /**
    * Replaces spell checker functions with our own, so that `electron` uses our encrypted dictionary
    * and not the default, plain-text one. Executed each time a browser window gets focused.
    */
   private async replaceSpellCheckerFunctions() {
+    if (this.isMacOS) {
+      return
+    }
+
     await app.whenReady()
 
     app.on('browser-window-focus', () => {
@@ -57,6 +66,10 @@ class SecureSpellChecker {
    * Sets up the IPC channels to communicate with the renderer process.
    */
   private handleIPCMessages() {
+    if (this.isMacOS) {
+      return
+    }
+
     ipcMain.handle(IPCMessageChannels.WordsNotInDictionary, (_, words: string[]) => {
       return this.wordsNotInDictionary(words)
     })
@@ -67,7 +80,10 @@ class SecureSpellChecker {
   }
 
   private wordsNotInDictionary(words: string[]): string[] {
-    return words.filter(word => !this.userDictionary.match(word))
+    if (this.isMacOS) {
+      return []
+    }
+    return words.filter(word => !this.userDictionary!.match(word))
   }
 
   /**
@@ -77,7 +93,10 @@ class SecureSpellChecker {
    * @param word the misspelt word.
    */
   public addToDictionary(word: string): boolean {
-    return this.userDictionary.add(word)
+    if (this.isMacOS) {
+      return false
+    }
+    return this.userDictionary!.add(word)
   }
 
   /**
@@ -87,7 +106,10 @@ class SecureSpellChecker {
    * @param word the misspelt word.
    */
   public removeFromDictionary(word: string): boolean {
-    return this.userDictionary.remove(word)
+    if (this.isMacOS) {
+      return false
+    }
+    return this.userDictionary!.remove(word)
   }
 
   /**
@@ -96,7 +118,10 @@ class SecureSpellChecker {
    * Has the same effect as using `listWordsInSpellCheckerDictionary` on your session object.
    */
   public listWords(): string[] {
-    return this.userDictionary.getContents()
+    if (this.isMacOS) {
+      return []
+    }
+    return this.userDictionary!.getContents()
   }
 
   /**
@@ -107,6 +132,9 @@ class SecureSpellChecker {
    * @param word the misspelt word to get suggestions from.
    */
   public getSpellingSuggestions(word: string): string[] {
+    if (this.isMacOS) {
+      return []
+    }
     return this.spellingSuggestions[word] ?? []
   }
 }

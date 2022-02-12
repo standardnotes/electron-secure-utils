@@ -1,5 +1,5 @@
 import { webFrame, ipcRenderer } from 'electron'
-import { IPCMessageChannels } from './constants'
+import { IPCMessageChannels, MACOS_SPELLCHECKER_NOOP_WARNING } from './constants'
 
 const streamSpellCheckSuggestionsForWords = (misspeltWords: string[]) => {
   let wordSuggestions = {}
@@ -19,7 +19,8 @@ const streamSpellCheckSuggestionsForWords = (misspeltWords: string[]) => {
  */
 function setSpellCheckProvider() {
   if (process.platform === 'darwin') {
-    throw new Error('System spellchecker is used in MacOS. Skipping...');
+    console.warn(MACOS_SPELLCHECKER_NOOP_WARNING)
+    return
   }
 
   if (process.type !== 'renderer') {
