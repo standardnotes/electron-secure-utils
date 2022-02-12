@@ -21,9 +21,7 @@ app.on('ready', () => {
   const secureSpellChecker = SecureSpellChecker.initialize()
 
   contextMenu({
-    menu: (actions, { misspelledWord }) => {
-      let suggestionOptions = []
-
+    menu: (actions, { misspelledWord }, _, dictionarySuggestions) => {
       const buildSuggestionOptions = (suggestions) => {
         if (suggestions.length === 0) {
           return [
@@ -42,13 +40,13 @@ app.on('ready', () => {
         })
       }
 
-      if (misspelledWord) {
-        const dictionarySuggestions = secureSpellChecker.getSpellingSuggestions(misspelledWord)
-        suggestionOptions = buildSuggestionOptions(dictionarySuggestions)
+      if (misspelledWord && process.platform !== 'darwin') {
+        const suggestions = secureSpellChecker.getSpellingSuggestions(misspelledWord)
+        dictionarySuggestions = buildSuggestionOptions(suggestions)
       }
 
       return [
-        ...suggestionOptions,
+        ...dictionarySuggestions,
         actions.separator(),
         actions.copyLink({
           transform: content => `modified_link_${content}`
