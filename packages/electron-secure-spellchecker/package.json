@@ -1,6 +1,6 @@
 {
   "name": "@standardnotes/electron-secure-spellchecker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A spellchecker provider for Electron, that encrypts your dictionary file.",
   "homepage": "https://github.com/standardnotes/secure-utils/electron-secure-spellchecker#readme",
   "repository": {
