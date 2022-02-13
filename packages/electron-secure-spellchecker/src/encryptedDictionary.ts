@@ -66,7 +66,7 @@ class EncryptedDictionary {
      */
     dictionaryWords.pop()
 
-    this.dictionary = dictionaryWords.map((word) => word.toLocaleLowerCase())
+    this.dictionary = dictionaryWords
     this.save()
 
     fs.removeSync(defaultDictionaryPath)
@@ -135,7 +135,6 @@ class EncryptedDictionary {
   }
 
   public match(word: string) {
-    word = word.toLocaleLowerCase()
     return this.dictionary!.includes(word)
   }
 
