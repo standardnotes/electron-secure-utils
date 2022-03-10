@@ -22,6 +22,17 @@ function setup() {
     )
   }
 
+  /**
+   * Fixes an issue on Windows, that prevents using the spell checker
+   * when a single language is selected.
+   */
+  if (process.platform === 'win32') {
+    app.commandLine.appendSwitch(
+      'disable-features',
+      'WinUseBrowserSpellChecker'
+    )
+  }
+
   app.on('ready', () => {
     getOrCreateInstance()
   })
