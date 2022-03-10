@@ -17,7 +17,7 @@ class SecureSpellChecker {
     }
 
     if (process.type !== 'browser') {
-      throw new Error('Instance should be created in main process.')
+      throw new Error('SecureSpellChecker instance should be created in the main process.')
     }
 
     this.userDictionary = new EncryptedDictionary()

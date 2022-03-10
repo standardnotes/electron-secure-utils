@@ -3,6 +3,7 @@ const { app, BrowserWindow } = require('electron')
 const contextMenu = require('electron-context-menu')
 
 const SecureSpellChecker = require('../../dist').default
+SecureSpellChecker.setup()
 
 app.on('ready', () => {
   const mainWindow = new BrowserWindow({
@@ -18,7 +19,7 @@ app.on('ready', () => {
 
   mainWindow.loadURL(`file://${path.join(__dirname, '/index.html')}`)
 
-  const secureSpellChecker = SecureSpellChecker.initialize()
+  const secureSpellChecker = SecureSpellChecker.getInstance()
 
   contextMenu({
     menu: (actions, { misspelledWord }, _, dictionarySuggestions) => {

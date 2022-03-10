@@ -35,14 +35,15 @@ npm install @standardnotes/electron-secure-spellchecker
 
 ## Usage
 
-1. Import the package into your `main` file and call `initialize()`:
+1. Import the package into your `main` file and call `setup()` and `getInstance()`:
 
 ```javascript
 import SecureSpellChecker from '@standardnotes/electron-secure-spellchecker';
 
 ...
-
-const secureSpellChecker = SecureSpellChecker.initialize();
+SecureSpellChecker.setup();
+...
+const secureSpellChecker = SecureSpellChecker.getInstance();
 ```
 
 1. Use `secureSpellChecker.getSpellingSuggestions()` to obtain misspelt word suggestions:
