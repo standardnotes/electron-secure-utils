@@ -11,12 +11,6 @@ const streamSpellCheckSuggestionsForWords = (misspeltWords: string[]) => {
   ipcRenderer.send(IPCMessageChannels.StreamWordSuggestions, wordSuggestions)
 }
 
-/**
- * Sets the spell check provider to read words from our encrypted dictionary.
- * Uses IPC to obtain the words that are not in the dictionary.
- * 
- * Must be called within your preload script.
- */
 function setSpellCheckProvider() {
   if (process.platform === 'darwin') {
     console.warn(MACOS_SPELLCHECKER_NOOP_WARNING)
@@ -24,7 +18,9 @@ function setSpellCheckProvider() {
   }
 
   if (process.type !== 'renderer') {
-    throw new Error('setSpellCheckProvider should be called in renderer process.')
+    throw new Error(
+      'SecureSpellChecker.setSpellCheckProvider() should be called in the renderer process.'
+    )
   }
 
   webFrame.setSpellCheckProvider('en-US', {

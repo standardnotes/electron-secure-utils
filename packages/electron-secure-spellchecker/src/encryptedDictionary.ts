@@ -61,9 +61,7 @@ class EncryptedDictionary {
       return
     }
 
-    /**
-     * Removes the last line, which is a checksum of the dictionary contents.
-     */
+    /** Removes the last line, which is a checksum of the dictionary contents. */
     dictionaryWords.pop()
 
     this.dictionary = dictionaryWords
