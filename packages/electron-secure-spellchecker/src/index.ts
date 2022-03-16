@@ -18,7 +18,7 @@ function setup() {
 
   if (app.isReady()) {
     throw new Error(
-      'SecureSpellChecker.prepare() must be called before application is ready.'
+      'SecureSpellChecker.setup() must be called before application is ready.'
     )
   }
 
@@ -32,10 +32,6 @@ function setup() {
       'WinUseBrowserSpellChecker'
     )
   }
-
-  app.on('ready', () => {
-    getOrCreateInstance()
-  })
 }
 
 export default {
